@@ -1,10 +1,11 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, FormEvent } from "react";
 import { useEffect } from "react";
 import { Fragment } from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/site.css?raw";
+import { DemoAnswer } from "@/components/DemoAnswer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +29,21 @@ function Index() {
   const [openFeedback, setOpenFeedback] = useState(false);
   const [heroPlaying, setHeroPlaying] = useState(true);
   const [activeSlide2, setActiveSlide2] = useState(0);
+  const [demoQuestion, setDemoQuestion] = useState<string | null>(null);
+  const handleDemoSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const field = event.currentTarget.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
+    const text = (field?.value ?? "").trim();
+    setDemoQuestion(text || "I'm a veteran. How do I get care?");
+    if (field) field.value = "";
+  };
+  useEffect(() => {
+    const message = new URLSearchParams(window.location.search).get("message");
+    if (message && message.trim()) {
+      setDemoQuestion(message.trim());
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
   useEffect(() => {
     if (!openMenu0 && !openGovDialog && !openFeedback) return;
     const closeOutside = (event: MouseEvent) => {
@@ -412,7 +428,7 @@ function Index() {
                                         <div className="relative [--corner-scale:1] [corner-shape:round] rounded-32 mobile:rounded-[48px]" data-slot="chat-input-surface">
                                           <div className="relative">
                                             <div className="w-full relative">
-                                              <form className={"group flex w-full cursor-text \x62order \x62order-solid \x62order-transparent \x6futline-1 \x68as-[\x74extarea:\x64isabled]:\x63ursor-not-allowed px-5 ease-out-quint \x73hadow-composer-sm \x6dobile:\x73hadow-none min-h-14 py-2.5 pr-3 pl-6 mobile:min-h-0 bg-background-primary mobile:py-[23px] mobile:pl-10 mobile:pr-[23px] rounded-32 mobile:rounded-[48px] transition-[outline-color,box-shadow] duration-700 ease-out-quint relative z-10 flex-col items-stretch overflow-clip \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6fverflow-visible \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6futline-none \x6dax-md:\x6din-h-16 \x6dax-md:\x74ransition-[\x70adding] \x6dax-md:\x64uration-250 \x6dax-md:\x65ase-drawer \x6dotion-reduce:\x74ransition-none \x6dax-md:\x70-3 \x72ing-border-secondary \x72ing-2 \x6futline-transparent"} style={{ opacity: "1" }} data-slot="chat-input-shell" aria-label="Describe what you need">
+                                              <form onSubmit={handleDemoSubmit} className={"group flex w-full cursor-text \x62order \x62order-solid \x62order-transparent \x6futline-1 \x68as-[\x74extarea:\x64isabled]:\x63ursor-not-allowed px-5 ease-out-quint \x73hadow-composer-sm \x6dobile:\x73hadow-none min-h-14 py-2.5 pr-3 pl-6 mobile:min-h-0 bg-background-primary mobile:py-[23px] mobile:pl-10 mobile:pr-[23px] rounded-32 mobile:rounded-[48px] transition-[outline-color,box-shadow] duration-700 ease-out-quint relative z-10 flex-col items-stretch overflow-clip \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6fverflow-visible \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6futline-none \x6dax-md:\x6din-h-16 \x6dax-md:\x74ransition-[\x70adding] \x6dax-md:\x64uration-250 \x6dax-md:\x65ase-drawer \x6dotion-reduce:\x74ransition-none \x6dax-md:\x70-3 \x72ing-border-secondary \x72ing-2 \x6futline-transparent"} style={{ opacity: "1" }} data-slot="chat-input-shell" aria-label="Describe what you need">
                                                 <div className="contents">
                                                   <label className={"\x73r-only"} id="_r1r_6_" htmlFor="_r1r_6_-field">Describe what you need</label>
                                                   <div className={"w-full shrink-0 overflow-visible \x64rop-shadow-[\x30_10px_20px_rgba(\x31,\x314,\x336,\x30.\x308)]"} style={{ height: "0px" }}>
@@ -583,7 +599,7 @@ function Index() {
                       <div className={"pointer-events-none absolute \x69nset-x-0 bottom-full mb-[var(--composer-edge-gap,8px)]"} />
                       <div className="relative">
                         <div className="w-full relative">
-                          <form className={"group flex w-full cursor-text \x62order \x62order-solid \x62order-transparent \x6futline-1 \x6futline-border-quaternary bg-background-primary \x68as-[\x74extarea:\x64isabled]:\x63ursor-not-allowed px-5 transition-[background-color,outline-color,box-shadow,backdrop-filter,color] duration-500 ease-out-quint \x73hadow-composer-sm \x73m:\x73hadow-elevation-1 min-h-14 py-2.5 pr-3 pl-6 mobile:min-h-0 mobile:pr-6 mobile:pl-8 mobile:py-[22px] rounded-32 mobile:rounded-40 relative z-10 flex-col items-stretch overflow-clip \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6fverflow-visible \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6futline-none \x6dax-md:\x6din-h-16 \x6dax-md:\x74ransition-[\x70adding] \x6dax-md:\x64uration-250 \x6dax-md:\x65ase-drawer \x6dotion-reduce:\x74ransition-none \x6dax-md:\x70y-[\x313px] \x6dax-md:\x70l-6 \x6dax-md:\x70r-3.\x35 \x72ing-border-secondary \x72ing-1"} style={{ backgroundColor: "var(--color-background-primary)", outlineColor: "transparent" } as CSSProperties} data-slot="chat-input-shell" aria-label="Ask America">
+                          <form onSubmit={handleDemoSubmit} className={"group flex w-full cursor-text \x62order \x62order-solid \x62order-transparent \x6futline-1 \x6futline-border-quaternary bg-background-primary \x68as-[\x74extarea:\x64isabled]:\x63ursor-not-allowed px-5 transition-[background-color,outline-color,box-shadow,backdrop-filter,color] duration-500 ease-out-quint \x73hadow-composer-sm \x73m:\x73hadow-elevation-1 min-h-14 py-2.5 pr-3 pl-6 mobile:min-h-0 mobile:pr-6 mobile:pl-8 mobile:py-[22px] rounded-32 mobile:rounded-40 relative z-10 flex-col items-stretch overflow-clip \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6fverflow-visible \x68as-[[\x64ata-slot=\x63hat-input-drop-zone]]:\x6futline-none \x6dax-md:\x6din-h-16 \x6dax-md:\x74ransition-[\x70adding] \x6dax-md:\x64uration-250 \x6dax-md:\x65ase-drawer \x6dotion-reduce:\x74ransition-none \x6dax-md:\x70y-[\x313px] \x6dax-md:\x70l-6 \x6dax-md:\x70r-3.\x35 \x72ing-border-secondary \x72ing-1"} style={{ backgroundColor: "var(--color-background-primary)", outlineColor: "transparent" } as CSSProperties} data-slot="chat-input-shell" aria-label="Ask America">
                             <div className="contents">
                               <label className={"\x73r-only"} id="_r1r_1d_" htmlFor="_r1r_1d_-field">Ask America</label>
                               <div className={"w-full shrink-0 overflow-visible \x64rop-shadow-[\x30_10px_20px_rgba(\x31,\x314,\x336,\x30.\x308)]"} style={{ height: "0px" }}>
@@ -621,7 +637,7 @@ function Index() {
                                       </button>
                                     </div>
                                     <div className="shrink-0" style={{ opacity: "1", transform: "none" }}>
-                                      <button className={"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium ease-out-quint \x61ctive:\x73cale-press \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 bg-blue-700 text-white \x73hadow-elevation-1 hover:bg-blue-800 focus-visible:bg-blue-700 active:bg-blue-700 \x61ctive:\x73hadow-none size-9 rounded-full p-0 \x61ctive:\x73cale-100 transition-[background-color,color,box-shadow] duration-200 ease-standard \x6dotion-reduce:\x74ransition-none \x73hadow-[\x30px_10px_40px_0px_rgba(\x30,\x30,\x30,\x30.\x308)] \x64isabled:\x63ursor-not-allowed disabled:bg-background-tertiary disabled:text-text-disabled \x64isabled:\x73hadow-none"} type="submit" tabIndex={0} aria-label="Send message" disabled>
+                                      <button className={"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium ease-out-quint \x61ctive:\x73cale-press \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 bg-blue-700 text-white \x73hadow-elevation-1 hover:bg-blue-800 focus-visible:bg-blue-700 active:bg-blue-700 \x61ctive:\x73hadow-none size-9 rounded-full p-0 \x61ctive:\x73cale-100 transition-[background-color,color,box-shadow] duration-200 ease-standard \x6dotion-reduce:\x74ransition-none \x73hadow-[\x30px_10px_40px_0px_rgba(\x30,\x30,\x30,\x30.\x308)] \x64isabled:\x63ursor-not-allowed disabled:bg-background-tertiary disabled:text-text-disabled \x64isabled:\x73hadow-none"} type="submit" tabIndex={0} aria-label="Send message">
                                         <span className="flex items-center justify-center" style={{ opacity: "1", transform: "none" }}>
                                           <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                             <path d="M10 3L8.59 4.41L13.17 9H3V11H13.17L8.59 15.59L10 17L17 10L10 3Z" fill="currentColor" />
@@ -769,7 +785,7 @@ function Index() {
         <button disabled className={"mb-3 h-11 w-full cursor-not-allowed rounded-40 bg-background-tertiary type-body-m font-medium text-text-disabled"} type="button">Submit</button>
         <p className={"text-center text-[0.875rem] text-secondary"}>This form is for website feedback only. We can&apos;t respond to personal questions or requests for customer support.</p>
       </div>
-
+      {demoQuestion !== null && <DemoAnswer question={demoQuestion} onClose={() => setDemoQuestion(null)} />}
     </>
   );
 }
