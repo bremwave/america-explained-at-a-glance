@@ -305,7 +305,7 @@ function Index() {
                 <div className={"grid grid-rows-[1fr] \x62g-inherit"} data-slot="gov-banner-row">
                   <div className="min-h-0 overflow-hidden">
                     <div className="">
-                      <ImportedSectionUSGovernmentWebsites />
+                      <ImportedSectionUSGovernmentWebsites openGovDialog={openGovDialog} onOpenGov={() => setOpenGovDialog(true)} />
                     </div>
                   </div>
                 </div>
@@ -535,7 +535,7 @@ function Index() {
                 <ImportedSection29000WebsitesInto />
                 <ImportedSectionMoreComingIn2027 />
               </main>
-              <ImportedFooter />
+              <ImportedFooter openFeedback={openFeedback} onOpenFeedback={() => setOpenFeedback(true)} />
             </div>
           </div>
           <div className="contents" data-slot="viewport-anchor">
@@ -731,7 +731,7 @@ function Index() {
             </button>
           </div>
           <div className="flex shrink-0 flex-col gap-[clamp(1rem,4dvh,2rem)] mobile:gap-14">
-            <ImportedNavMenu />
+            <ImportedNavMenu openFeedback={openFeedback} onOpenFeedback={() => setOpenFeedback(true)} />
             <div className={"flex flex-col items-center gap-2 rounded-12 bg-background-tertiary pt-4 pr-8 pb-6 pl-6 \x74ext-blue-900/\x365 \x64ark:\x74ext-text-secondary mobile:rounded-16"} style={{ opacity: "1" }}>
               <span className="flex size-6 shrink-0 items-center justify-center" aria-hidden="true">
                 <img className={"\x64ark:\x68idden [&]:max-w-none"} style={{ aspectRatio: "24 / 14" }} alt="" width="24" height="14" />
@@ -759,11 +759,11 @@ function Index() {
   );
 }
 
-function ImportedSectionUSGovernmentWebsites() {
+function ImportedSectionUSGovernmentWebsites({ openGovDialog, onOpenGov }: { openGovDialog: boolean; onOpenGov: () => void }) {
   return (
     <section className="w-full" aria-label="U.S. Government Websites" data-slot="gov-banner">
       <div className="mx-auto flex min-h-10 py-3 max-w-site items-center justify-center gap-2 page-gutter" data-site-import-desktop-variant="">
-        <button className={"group flex cursor-pointer items-center gap-1.5 rounded-full \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none"} type="button" tabIndex={0} id="base-ui-_r1r_5g_" aria-haspopup="dialog" aria-expanded={openGovDialog} data-slot="sheet-trigger" onClick={event => { event.preventDefault(); event.stopPropagation(); setOpenGovDialog(true); }}>
+        <button className={"group flex cursor-pointer items-center gap-1.5 rounded-full \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none"} type="button" tabIndex={0} id="base-ui-_r1r_5g_" aria-haspopup="dialog" aria-expanded={openGovDialog} data-slot="sheet-trigger" onClick={event => { event.preventDefault(); event.stopPropagation(); onOpenGov(); }}>
           <span className="flex items-center gap-1">
             <span className="flex items-center pt-px">
               <span className={"type-label-s flex h-2.5 items-end text-secondary transition-colors duration-200 \x67roup-hover:\x74ext-primary"}>An official website of the United States government</span>
@@ -1392,7 +1392,7 @@ function ImportedSectionMoreComingIn2027() {
   );
 }
 
-function ImportedFooter() {
+function ImportedFooter({ openFeedback, onOpenFeedback }: { openFeedback: boolean; onOpenFeedback: () => void }) {
   return (
     <footer className={"pb-24 text-pretty text-black \x64ark:\x74ext-text-primary \x73ite-desktop:\x70b-30 \x70t-site-section \x6dobile:\x70t-site-section-lg"} data-slot="site-footer">
       <div className={"mx-auto w-[calc(100%-var(--site-grid-margin)*2)] site-grid gap-y-20 \x73ite-desktop:\x67ap-y-36 \x73ite-desktop:[\x2d-site-grid-margin:\x396px]"}>
@@ -1417,7 +1417,7 @@ function ImportedFooter() {
               <a className={"max-w-full rounded-8 bg-transparent \x64ecoration-[\x6dax(\x31.\x35px,\x30.\x303em)] \x75nderline-offset-[\x6dax(\x34px,\x30.\x312em)] \x68over:\x75nderline \x66ocus-visible:\x75nderline \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none block px-2"} href="/faq">Frequently asked questions</a>
             </li>
             <li className="max-w-full">
-              <button className={"shrink-0 cursor-pointer items-center justify-center gap-2 transition-[color,background-color,border-color,box-shadow,scale,opacity] duration-200 ease-out-quint \x61ctive:\x73cale-press \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled max-w-full rounded-8 bg-transparent \x64ecoration-[\x6dax(\x31.\x35px,\x30.\x303em)] \x75nderline-offset-[\x6dax(\x34px,\x30.\x312em)] \x68over:\x75nderline \x66ocus-visible:\x75nderline \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none type-section-heading block h-auto min-h-0 px-2 py-0 font-normal text-inherit \x68over:\x62g-transparent \x61ctive:\x73cale-100 active:text-inherit"} type="button" tabIndex={0} aria-haspopup="dialog" aria-expanded={openFeedback} onClick={event => { event.preventDefault(); event.stopPropagation(); setOpenFeedback(true); }}>Submit feedback</button>
+              <button className={"shrink-0 cursor-pointer items-center justify-center gap-2 transition-[color,background-color,border-color,box-shadow,scale,opacity] duration-200 ease-out-quint \x61ctive:\x73cale-press \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled max-w-full rounded-8 bg-transparent \x64ecoration-[\x6dax(\x31.\x35px,\x30.\x303em)] \x75nderline-offset-[\x6dax(\x34px,\x30.\x312em)] \x68over:\x75nderline \x66ocus-visible:\x75nderline \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none type-section-heading block h-auto min-h-0 px-2 py-0 font-normal text-inherit \x68over:\x62g-transparent \x61ctive:\x73cale-100 active:text-inherit"} type="button" tabIndex={0} aria-haspopup="dialog" aria-expanded={openFeedback} onClick={event => { event.preventDefault(); event.stopPropagation(); onOpenFeedback(); }}>Submit feedback</button>
             </li>
           </ul>
         </nav>
@@ -1484,7 +1484,7 @@ function ImportedFooter() {
   );
 }
 
-function ImportedNavMenu() {
+function ImportedNavMenu({ openFeedback, onOpenFeedback }: { openFeedback: boolean; onOpenFeedback: () => void }) {
   return (
     <nav className="flex flex-col gap-12" aria-label="Menu">
       <ul className="flex flex-col items-center gap-1">
@@ -1510,7 +1510,7 @@ function ImportedNavMenu() {
           <a className={"block rounded-8 text-center text-inherit decoration-from-font [text-underline-position:from-font] \x68over:\x75nderline \x66ocus-visible:\x75nderline \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none font-sans-display text-[clamp(1.5rem,4.5dvh,2rem)] leading-[1.25] font-medium tracking-(--tracking-body) \x6dobile:\x74ext-[\x32rem]"} href="/faq" tabIndex={0}>FAQ</a>
         </li>
         <li className="max-w-full" style={{ opacity: "1" }} data-site-import-responsive="1291">
-          <button className={"shrink-0 cursor-pointer items-center justify-center gap-2 duration-200 ease-out-quint \x61ctive:\x73cale-press \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 type-body-m bg-transparent focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled h-auto min-h-0 max-w-full whitespace-normal p-0 transition-none \x68over:\x62g-transparent \x61ctive:\x73cale-100 active:text-inherit block rounded-8 text-center text-inherit decoration-from-font [text-underline-position:from-font] \x68over:\x75nderline \x66ocus-visible:\x75nderline \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none font-sans-display text-[clamp(1.5rem,4.5dvh,2rem)] leading-[1.25] font-medium tracking-(--tracking-body) \x6dobile:\x74ext-[\x32rem]"} type="button" tabIndex={0} aria-haspopup="dialog" aria-expanded={openFeedback} onClick={event => { event.preventDefault(); event.stopPropagation(); setOpenFeedback(true); }}>
+          <button className={"shrink-0 cursor-pointer items-center justify-center gap-2 duration-200 ease-out-quint \x61ctive:\x73cale-press \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 type-body-m bg-transparent focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled h-auto min-h-0 max-w-full whitespace-normal p-0 transition-none \x68over:\x62g-transparent \x61ctive:\x73cale-100 active:text-inherit block rounded-8 text-center text-inherit decoration-from-font [text-underline-position:from-font] \x68over:\x75nderline \x66ocus-visible:\x75nderline \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none font-sans-display text-[clamp(1.5rem,4.5dvh,2rem)] leading-[1.25] font-medium tracking-(--tracking-body) \x6dobile:\x74ext-[\x32rem]"} type="button" tabIndex={0} aria-haspopup="dialog" aria-expanded={openFeedback} onClick={event => { event.preventDefault(); event.stopPropagation(); onOpenFeedback(); }}>
             <span className={"font-sans-display text-[clamp(1.5rem,4.5dvh,2rem)] leading-[1.25] font-medium tracking-(--tracking-body) \x6dobile:\x74ext-[\x32rem]"}>Submit feedback</span>
           </button>
         </li>
