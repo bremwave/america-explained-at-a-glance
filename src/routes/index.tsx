@@ -17,6 +17,7 @@ function Index() {
   const menuRoot0 = useRef<Element | null>(null);
   const [openGovDialog, setOpenGovDialog] = useState(false);
   const [openFeedback, setOpenFeedback] = useState(false);
+  const [heroPlaying, setHeroPlaying] = useState(true);
   const [activeSlide2, setActiveSlide2] = useState(0);
   useEffect(() => {
     if (!openMenu0 && !openGovDialog && !openFeedback) return;
@@ -28,6 +29,11 @@ function Index() {
     document.addEventListener("keydown", closeOnEscape);
     return () => { document.removeEventListener("click", closeOutside); document.removeEventListener("keydown", closeOnEscape); };
   }, [openMenu0, openGovDialog, openFeedback]);
+  useEffect(() => {
+    if (!heroPlaying) return;
+    const id = window.setInterval(() => setActiveSlide2(index => (index + 1) % 2), 8000);
+    return () => window.clearInterval(id);
+  }, [heroPlaying]);
   useImportedLayout();
   const carouselContent0 = (<>
 {activeSlide2 === 0 && <Fragment key={0}>
@@ -122,14 +128,14 @@ function Index() {
         <path fillRule="evenodd" clipRule="evenodd" d="M7.77 10L13.06 4.71L11.65 3.29L4.94 10L11.65 16.71L13.06 15.29L7.77 10Z" fill="currentColor" />
       </svg>
     </button>
-    <button className={"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium transition-[color,background-color,border-color,box-shadow,scale,opacity] duration-200 ease-out-quint \x61ctive:\x73cale-press \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled group/playback-control \x73croll-m-2 rounded-full p-0 \x61ctive:\x73cale-95 \x6dotion-reduce:\x74ransition-none \x6dotion-reduce:\x61ctive:\x73cale-100 size-14 \x62order-0 bg-background-tertiary text-text-primary \x73hadow-none hover:bg-background-secondary active:bg-background-secondary active:text-text-primary [&\x5fsvg]:\x73ize-5"} type="button" tabIndex={0} data-slot="carousel-playback" aria-label="Play the example questions">
+    <button className={"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium transition-[color,background-color,border-color,box-shadow,scale,opacity] duration-200 ease-out-quint \x61ctive:\x73cale-press \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled group/playback-control \x73croll-m-2 rounded-full p-0 \x61ctive:\x73cale-95 \x6dotion-reduce:\x74ransition-none \x6dotion-reduce:\x61ctive:\x73cale-100 size-14 \x62order-0 bg-background-tertiary text-text-primary \x73hadow-none hover:bg-background-secondary active:bg-background-secondary active:text-text-primary [&\x5fsvg]:\x73ize-5"} type="button" tabIndex={0} data-slot="carousel-playback" aria-label={heroPlaying ? "Pause the example questions" : "Play the example questions"} onClick={event => { event.preventDefault(); event.stopPropagation(); setHeroPlaying(playing => !playing); }}>
       <div className={"relative \x67roup-focus-visible/\x70layback-control:[&>\x64iv]:\x74ransition-none"}>
-        <div className={"absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity transform-none opacity-100"} aria-hidden="false">
+        <div className={"absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity transform-none opacity-100"} style={{ opacity: heroPlaying ? 0 : 1 } as CSSProperties} aria-hidden={heroPlaying ? "true" : "false"}>
           <svg fill="none" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M6 3L18 10L6 17L6 3Z" fill="currentColor" />
           </svg>
         </div>
-        <div className={"transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity [transform:scale(0.97)] opacity-0 \x6dotion-reduce:\x74ransform-none"} aria-hidden="true">
+        <div className={"transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity [transform:scale(0.97)] opacity-0 \x6dotion-reduce:\x74ransform-none"} style={{ opacity: heroPlaying ? 1 : 0 } as CSSProperties} aria-hidden={heroPlaying ? "false" : "true"}>
           <svg fill="none" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M8 4C8 3.45 7.55 3 7 3H5C4.45 3 4 3.45 4 4V16C4 16.55 4.45 17 5 17H7C7.55 17 8 16.55 8 16V4Z" fill="currentColor" />
             <path d="M16 4C16 3.45 15.55 3 15 3H13C12.45 3 12 3.45 12 4V16C12 16.55 12.45 17 13 17H15C15.55 17 16 16.55 16 16V4Z" fill="currentColor" />
@@ -269,14 +275,14 @@ function Index() {
         <path fillRule="evenodd" clipRule="evenodd" d="M7.77 10L13.06 4.71L11.65 3.29L4.94 10L11.65 16.71L13.06 15.29L7.77 10Z" fill="currentColor" />
       </svg>
     </button>
-    <button className={"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium transition-[color,background-color,border-color,box-shadow,scale,opacity] duration-200 ease-out-quint \x61ctive:\x73cale-press \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled group/playback-control \x73croll-m-2 rounded-full p-0 \x61ctive:\x73cale-95 \x6dotion-reduce:\x74ransition-none \x6dotion-reduce:\x61ctive:\x73cale-100 size-14 \x62order-0 bg-background-tertiary text-text-primary \x73hadow-none hover:bg-background-secondary active:bg-background-secondary active:text-text-primary [&\x5fsvg]:\x73ize-5"} type="button" tabIndex={0} data-slot="carousel-playback" aria-label="Play the example questions">
+    <button className={"inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 font-medium transition-[color,background-color,border-color,box-shadow,scale,opacity] duration-200 ease-out-quint \x61ctive:\x73cale-press \x66ocus-visible:\x73hadow-[\x30_0_0_2px_#\x66ff,\x30_0_0_4px_var(\x2d-color-black-100)] \x66ocus-visible:\x6futline-none \x64isabled:\x70ointer-events-none [&\x5fsvg]:\x70ointer-events-none [&\x5fsvg]:\x73hrink-0 focus-visible:bg-background-tertiary \x64isabled:\x62g-transparent disabled:text-text-disabled group/playback-control \x73croll-m-2 rounded-full p-0 \x61ctive:\x73cale-95 \x6dotion-reduce:\x74ransition-none \x6dotion-reduce:\x61ctive:\x73cale-100 size-14 \x62order-0 bg-background-tertiary text-text-primary \x73hadow-none hover:bg-background-secondary active:bg-background-secondary active:text-text-primary [&\x5fsvg]:\x73ize-5"} type="button" tabIndex={0} data-slot="carousel-playback" aria-label={heroPlaying ? "Pause the example questions" : "Play the example questions"} onClick={event => { event.preventDefault(); event.stopPropagation(); setHeroPlaying(playing => !playing); }}>
       <div className={"relative \x67roup-focus-visible/\x70layback-control:[&>\x64iv]:\x74ransition-none"}>
-        <div className={"absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity transform-none opacity-100"} aria-hidden="false">
+        <div className={"absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity transform-none opacity-100"} style={{ opacity: heroPlaying ? 0 : 1 } as CSSProperties} aria-hidden={heroPlaying ? "true" : "false"}>
           <svg fill="none" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M6 3L18 10L6 17L6 3Z" fill="currentColor" />
           </svg>
         </div>
-        <div className={"transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity [transform:scale(0.97)] opacity-0 \x6dotion-reduce:\x74ransform-none"} aria-hidden="true">
+        <div className={"transition-[opacity,transform] duration-150 ease-out-quint \x6dotion-reduce:\x74ransition-opacity [transform:scale(0.97)] opacity-0 \x6dotion-reduce:\x74ransform-none"} style={{ opacity: heroPlaying ? 1 : 0 } as CSSProperties} aria-hidden={heroPlaying ? "false" : "true"}>
           <svg fill="none" height="16" viewBox="0 0 20 20" width="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M8 4C8 3.45 7.55 3 7 3H5C4.45 3 4 3.45 4 4V16C4 16.55 4.45 17 5 17H7C7.55 17 8 16.55 8 16V4Z" fill="currentColor" />
             <path d="M16 4C16 3.45 15.55 3 15 3H13C12.45 3 12 3.45 12 4V16C12 16.55 12.45 17 13 17H15C15.55 17 16 16.55 16 16V4Z" fill="currentColor" />
