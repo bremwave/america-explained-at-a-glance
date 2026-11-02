@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type Source = { title: string; domain: string; note: string };
@@ -105,7 +106,7 @@ function scriptFor(question: string): Script {
   const q = question.toLowerCase();
   if (/^(hi|hey|hello|yo|sup|hola|good (morning|afternoon|evening))\b/.test(q.trim()) || q.trim() === "hi!") return HELLO;
   if (q.includes("social security") || q.includes("card")) return SOCIAL_SECURITY;
-  if (q.includes("veteran") || q.includes("va ")) || q.includes("va care") || q.includes("veteran")) return VETERAN;
+  if (q.includes("veteran") || q.includes("va ") || q.includes("va care")) return VETERAN;
   if (q.includes("camp") || q.includes("park") || q.includes("hike") || q.includes("reservation")) return PARK;
   if (q.includes("medicare") || q.includes("medicaid")) return MEDICARE;
   if (q.includes("married") || q.includes("name") || q.includes("passport")) return NAME_CHANGE;
