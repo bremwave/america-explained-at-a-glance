@@ -7,7 +7,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import capturedCSS from "../styles/site.css?raw";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "America.gov" }] }),
+  head: () => ({
+    meta: [
+      { title: "America.gov — Whatever you need from government, start here." },
+      { name: "description", content: "Ask anything and get simple answers only from official government sources. Free to use, no ads, privacy protected." },
+      { property: "og:title", content: "America.gov" },
+      { property: "og:description", content: "Whatever you need from government, start here." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   staticData: { importedDocument: { html: { "dir": "ltr", "lang": "en" }, body: { "className": "\x66ont-body \x74ext-primary \x61ntialiased" } } },
   component: Index,
 });
