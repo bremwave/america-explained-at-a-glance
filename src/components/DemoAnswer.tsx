@@ -308,7 +308,7 @@ export function DemoAnswer({ question, onClose }: { question: string; onClose: (
               <div className="demo-sources">
                 {script.sources.map((s, i) => (
                   <div className="demo-source" key={s.domain + s.title} style={{ animationDelay: `${0.08 * i}s`, "--d": `${0.3 + 0.25 * i}s` } as CSSProperties}>
-                    <b>{s.domain[0].toUpperCase()}</b>
+                    <b>{s.domain.slice(0, 1).toUpperCase()}</b>
                     <span style={{ minWidth: 0 }}>
                       <span>{s.title}</span>
                       <small>{s.domain} · {s.note}</small>
