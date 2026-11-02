@@ -307,7 +307,7 @@ export function DemoAnswer({ question, onClose }: { question: string; onClose: (
               <p className="demo-label" style={{ marginTop: 16 }}>Sources · only official sites</p>
               <div className="demo-sources">
                 {script.sources.map((s, i) => (
-                  <div className="demo-source" key={s.domain + s.title} style={{ animationDelay: `${0.08 * i}s`, "--d": `${0.3 + 0.25 * i}s` } as React.CSSProperties}>
+                  <div className="demo-source" key={s.domain + s.title} style={{ animationDelay: `${0.08 * i}s`, "--d": `${0.3 + 0.25 * i}s` } as CSSProperties}>
                     <b>{s.domain[0].toUpperCase()}</b>
                     <span style={{ minWidth: 0 }}>
                       <span>{s.title}</span>
