@@ -316,7 +316,7 @@ function Index() {
                         <svg className="text-primary h-auto w-[156px] max-w-full overflow-visible" aria-hidden="true" width="159" height="23" viewBox="0 0 159 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g data-slot="header-flag">
                             <g className="pointer-events-none">
-                              <image x="0" y="1" width="30" height="17" />
+                              <image x="0" y="1" width="30" height="17" href="/site-assets/us-flag.svg" />
                             </g>
                             <rect width="31" height="17" y="1" fill="transparent" />
                           </g>
@@ -734,8 +734,8 @@ function Index() {
             <ImportedNavMenu openFeedback={openFeedback} onOpenFeedback={() => setOpenFeedback(true)} />
             <div className={"flex flex-col items-center gap-2 rounded-12 bg-background-tertiary pt-4 pr-8 pb-6 pl-6 \x74ext-blue-900/\x365 \x64ark:\x74ext-text-secondary mobile:rounded-16"} style={{ opacity: "1" }}>
               <span className="flex size-6 shrink-0 items-center justify-center" aria-hidden="true">
-                <img className={"\x64ark:\x68idden [&]:max-w-none"} style={{ aspectRatio: "24 / 14" }} alt="" width="24" height="14" />
-                <img className={"hidden \x64ark:\x62lock [&]:max-w-none"} style={{ aspectRatio: "24 / 14" }} alt="" width="24" height="14" />
+                <img className={"\x64ark:\x68idden [&]:max-w-none"} style={{ aspectRatio: "24 / 14" }} alt="" width="24" height="14" src="/site-assets/us-flag.svg" />
+                <img className={"hidden \x64ark:\x62lock [&]:max-w-none"} style={{ aspectRatio: "24 / 14" }} alt="" width="24" height="14" src="/site-assets/us-flag.svg" />
               </span>
               <p className="w-[191px] max-w-full text-center font-sans text-[0.875rem] leading-[1.35] font-normal tracking-tight">An official website of the United States government</p>
             </div>
